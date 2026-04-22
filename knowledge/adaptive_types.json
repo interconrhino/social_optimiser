@@ -1,0 +1,102 @@
+[
+  {
+    "id": "alignment",
+    "name": "Alignment Problem",
+    "sub_category": "adaptive",
+    "description": "The problem stems from disagreement about what the problem actually is, what the desired end state looks like, or what actions should be taken. Different stakeholders may define success differently, pursue conflicting agendas, or fail to coordinate on a shared direction.",
+    "signals": [
+      "Different teams or leaders describe the problem in incompatible ways",
+      "There is no shared definition of what success looks like",
+      "Stakeholders agree something is wrong but disagree on what to do about it",
+      "Proposed solutions keep getting blocked because people don't agree on the goal",
+      "Multiple initiatives are underway that pull in different directions",
+      "The 'right' problem to solve is itself contested"
+    ],
+    "why_not_optimisable": "Optimisation requires a single, agreed objective function. When the end state is undefined or contested, there is nothing to optimise toward. Applying mathematical methods to an alignment problem risks optimising for the wrong goal or entrenching one faction's framing.",
+    "redirect_message": "This looks like an **Alignment Problem** — a challenge where the difficulty is not in finding the best solution, but in reaching agreement on what the problem and desired outcome actually are. AI optimisation tools work best when there is a shared, clearly defined goal to optimise toward. Before optimisation can help, the group needs to:\n\n1. **Define the end state together** — What does success look like in concrete terms? Who needs to agree on that definition?\n2. **Surface and reconcile competing agendas** — Whose framing is driving each proposed solution? What would it take to reach a shared framing?\n3. **Clarify the theory of change** — What pathway from action to outcome does each stakeholder believe in?\n\nUseful approaches at this stage include facilitated dialogue, problem-framing workshops, and Theory of Change development. Once there is alignment on the goal, an optimisation tool can help you find the best path to it.",
+    "suggested_next_steps": ["Facilitated stakeholder workshop", "Theory of Change development", "Problem-framing exercise", "Conflict mapping"]
+  },
+  {
+    "id": "coalitions_coordination",
+    "name": "Coalitions and Coordination Problem",
+    "sub_category": "adaptive",
+    "description": "The problem is that multiple actors — organisations, communities, factions — need to act together, but coordination is failing because of trust deficits, power imbalances, competing interests, or structural barriers to collaboration.",
+    "signals": [
+      "The solution is known, but multiple organisations need to act together and aren't",
+      "Turf battles or organisational competition are blocking collaboration",
+      "Each actor is doing something locally rational that creates a collectively poor outcome",
+      "A coalition needs to be built or sustained for the initiative to succeed",
+      "Key actors are not at the table or are actively blocking progress",
+      "Factions within a community or system are working at cross-purposes"
+    ],
+    "why_not_optimisable": "Coordination failures are not resource allocation problems — they are social and political problems about trust, incentives, and relationships. Optimising the distribution of resources doesn't change who is willing to work with whom.",
+    "redirect_message": "This looks like a **Coalitions and Coordination Problem** — the challenge is not finding the best technical solution, but getting the right actors to work together effectively. Quantitative optimisation cannot create trust or align incentives between competing organisations.\n\nThe work at this stage is:\n1. **Map the stakeholder landscape** — Who are the key actors? What are their interests, fears, and incentives?\n2. **Identify coordination barriers** — Is this a trust problem, an incentive problem, a power problem, or a structural problem?\n3. **Design coalition-building strategies** — What shared wins can be created? What governance structures enable sustained collaboration?\n\nUseful approaches: stakeholder mapping, power analysis, negotiation and mediation, coalition governance design.",
+    "suggested_next_steps": ["Stakeholder mapping", "Power analysis", "Negotiation / mediation facilitation", "Coalition governance design"]
+  },
+  {
+    "id": "power",
+    "name": "Power Problem",
+    "sub_category": "adaptive",
+    "description": "The problem is maintained by power dynamics — entrenched interests, hierarchies, or value systems that benefit from the status quo. The challenge is fundamentally about who has authority, whose values dominate, and whose interests are protected by current arrangements.",
+    "signals": [
+      "The problem persists despite known solutions because powerful actors benefit from it",
+      "Proposed changes are blocked by those who would lose influence or resources",
+      "The problem disproportionately harms those with least power in the system",
+      "Changing the situation requires changing who makes decisions or controls resources",
+      "The solution is politically sensitive or threatens existing hierarchies",
+      "Community voices are structurally excluded from the decision-making process"
+    ],
+    "why_not_optimisable": "Power problems cannot be solved by finding a more efficient allocation — the inefficiency is the point for those who benefit from it. Optimisation tools assume a neutral objective and decision-maker, which does not reflect power-laden systems.",
+    "redirect_message": "This looks like a **Power Problem** — the challenge is rooted in who holds power and whose interests the system currently serves. Technical optimisation assumes a shared objective and a neutral decision-maker. When power dynamics are the core issue, optimising within the existing system may simply make the unjust arrangement more efficient.\n\nThe work at this stage is:\n1. **Analyse power structures** — Who holds formal and informal power? Who benefits from the current situation?\n2. **Understand political economy** — What are the incentives maintaining the status quo?\n3. **Build countervailing power** — What coalitions, advocacy strategies, or governance reforms could shift the power balance?\n\nUseful approaches: power analysis, political economy analysis, advocacy strategy, participatory governance design.",
+    "suggested_next_steps": ["Power mapping", "Political economy analysis", "Advocacy and campaign strategy", "Participatory governance reform"]
+  },
+  {
+    "id": "inertia",
+    "name": "Inertia Problem",
+    "sub_category": "adaptive",
+    "description": "The problem persists because people — staff, communities, or leaders — are avoiding the discomfort of change. This may manifest as emotional resistance, organisational work avoidance, lack of adaptive capacity, or attachment to familiar ways of working even when they are not working.",
+    "signals": [
+      "Everyone agrees the change is needed but it keeps not happening",
+      "Previous change initiatives have stalled or been quietly abandoned",
+      "Resistance is passive — people comply but don't commit",
+      "There is a gap between stated values and actual behaviour",
+      "Fear of failure or loss of identity is driving avoidance",
+      "Staff or leadership are overwhelmed and defaulting to familiar routines"
+    ],
+    "why_not_optimisable": "Inertia is a human and organisational phenomenon, not a resource allocation problem. Providing a mathematically optimal solution does not help if people are not ready or willing to act on it. The challenge is emotional, cultural, and organisational.",
+    "redirect_message": "This looks like an **Inertia Problem** — the barrier to progress is not a lack of the right solution, but a lack of readiness or willingness to change. People or organisations are avoiding the discomfort, loss, or uncertainty that change requires. A mathematically optimal plan won't move things forward on its own.\n\nThe work at this stage is:\n1. **Name the loss** — What are people being asked to give up? What identity or way of working is at stake?\n2. **Build adaptive capacity** — What support, learning, and psychological safety do people need to engage with change?\n3. **Create productive discomfort** — How can leadership hold the pressure to change without letting people off the hook or overwhelming them?\n\nUseful approaches: adaptive leadership facilitation, change management, organisational learning, narrative change work.",
+    "suggested_next_steps": ["Adaptive leadership facilitation", "Change management planning", "Organisational culture assessment", "Staff engagement and learning design"]
+  },
+  {
+    "id": "adaptive_incentives",
+    "name": "Adaptive Incentives Problem",
+    "sub_category": "adaptive",
+    "description": "The problem involves qualitative incentive structures — social norms, perceived benefits and losses, cultural values, or identity — that cannot be easily quantified or optimised over. The behaviour change needed is driven by how people see themselves and what they fear losing, not by a calculable cost-benefit analysis.",
+    "signals": [
+      "Behaviour change is the goal, and it depends on social norms or identity",
+      "Quantitative incentives (money, time) have been tried and haven't worked",
+      "The calculus of change is emotional or relational, not economic",
+      "Peer pressure, stigma, or cultural values are central to the problem",
+      "Beneficiaries don't behave in ways that match a rational utility model"
+    ],
+    "why_not_optimisable": "Adaptive incentive problems require changing how people perceive value, risk, and identity — not optimising the distribution of measurable resources. Behavioural economics and social norm change approaches are more appropriate here.",
+    "redirect_message": "This looks like an **Adaptive Incentives Problem** — the core challenge is understanding and shifting the qualitative incentives (social norms, identity, perceived risk) that drive behaviour. Mathematical optimisation assumes quantifiable costs and benefits, but the key dynamics here are relational and cultural.\n\nThe work at this stage is:\n1. **Understand the behavioural drivers** — What do people gain or lose (socially, emotionally, identity-wise) from their current behaviour?\n2. **Design norm change strategies** — How can social proof, trusted messengers, or reframing shift the perceived calculus?\n3. **Pilot and learn** — Run small experiments to test which messages and interventions shift behaviour before scaling.\n\nUseful approaches: behavioural design, social norm change, community-based participatory research, human-centred design.",
+    "suggested_next_steps": ["Behavioural insights analysis", "Social norm mapping", "Human-centred design sprints", "Pilot and rapid iteration"]
+  },
+  {
+    "id": "institution",
+    "name": "Institution Problem",
+    "sub_category": "adaptive",
+    "description": "The problem is embedded in formal or informal rules, standards, laws, or institutional structures that constrain what is possible. The challenge is changing the rules of the game, not playing better within them.",
+    "signals": [
+      "Regulations, policies, or funding rules prevent effective action",
+      "The problem cannot be solved without changing a law, standard, or formal process",
+      "Institutional mandates or accountability structures misalign incentives",
+      "Multiple institutions have overlapping or contradictory rules governing the situation",
+      "Informal norms within institutions (e.g., how decisions really get made) are the barrier"
+    ],
+    "why_not_optimisable": "Institutional constraints are not parameters in an optimisation model — they are the rules that define what decisions are even possible. Changing them requires advocacy, policy reform, or institutional redesign, not optimisation within the current rules.",
+    "redirect_message": "This looks like an **Institution Problem** — the key constraint is in the formal or informal rules, policies, or structures governing the situation. Optimisation can help you work more efficiently within existing rules, but if the rules themselves are the problem, the real work is changing them.\n\nThe work at this stage is:\n1. **Map the institutional landscape** — Which rules, policies, or mandates are creating the constraint? Which institutions control them?\n2. **Identify reform pathways** — What would it take to change the relevant rule or structure? Who has authority to do so?\n3. **Build the case for change** — What evidence, coalitions, and advocacy are needed to make institutional reform viable?\n\nUseful approaches: policy analysis, regulatory mapping, advocacy strategy, institutional reform design.\n\n*Note: once institutional reform has created the right enabling environment, optimisation tools can help you make the most of the new space.*",
+    "suggested_next_steps": ["Policy and regulatory mapping", "Advocacy strategy development", "Institutional reform design", "Coalition building for policy change"]
+  }
+]

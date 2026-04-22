@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch(*)",
+      "WebFetch(*)",
+      "Read(knowledge/**)",
+      "Read(session_output/**)",
+      "Read(*.pdf)",
+      "Write(session_output/**)",
+      "Bash(ls session_output*)"
+    ]
+  }
+}

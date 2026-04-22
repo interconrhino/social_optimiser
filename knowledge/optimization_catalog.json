@@ -1,0 +1,249 @@
+[
+  {
+    "id": "linear_programming",
+    "name": "Linear Programming",
+    "category": "Resource Allocation",
+    "plain_name": "Resource Allocation Math",
+    "plain_description": "A method for finding the best way to distribute limited resources (money, staff, supplies) across multiple uses when both the goal and the limits can be expressed as straight-line relationships. Think of it as finding the fairest and most effective way to divide a pie when you know exactly how each slice will be used.",
+    "signals": [
+      "Allocating a fixed budget across programmes or sites",
+      "Distributing limited supplies (food, medicine, equipment) to multiple locations",
+      "Deciding how many staff or volunteers to assign to different tasks",
+      "Maximising total reach or impact given a spending cap",
+      "All decisions and constraints involve simple proportional relationships (no binary yes/no choices)"
+    ],
+    "contraindications": [
+      "Decisions are binary (fund or don't fund) — use Integer Programming instead",
+      "Multiple conflicting objectives (cost vs. equity vs. impact) — use Multi-objective Optimisation",
+      "Uncertainty or unknown probabilities are central — use Simulation or POMDP"
+    ],
+    "social_examples": [
+      "A food bank deciding how many kilograms of each food type to send to 15 partner organisations, given each organisation's capacity and nutritional needs",
+      "A health department allocating a fixed vaccine supply across clinics to maximise immunisation coverage",
+      "An NGO splitting its annual grant across 8 programme areas to maximise beneficiaries reached"
+    ],
+    "algorithm_examples": ["Simplex Method", "Interior Point Method", "Revised Simplex"],
+    "data_requirements": [
+      "Objective coefficients (e.g., impact per dollar spent at each site)",
+      "Constraint coefficients (e.g., capacity of each site, total budget)",
+      "Lower and upper bounds on each decision variable"
+    ],
+    "reference_paper": "Dantzig, G.B. (1963). Linear Programming and Extensions. Princeton University Press."
+  },
+  {
+    "id": "integer_programming",
+    "name": "Integer Programming",
+    "category": "Binary Decision Making",
+    "plain_name": "Yes/No Decision Math",
+    "plain_description": "An extension of resource allocation math for situations where decisions are all-or-nothing: open this shelter or not, fund this project or not, place a worker in this district or not. It finds the best combination of binary choices within your constraints.",
+    "signals": [
+      "Choosing which subset of locations, projects, or programmes to fund or open",
+      "Deciding which communities to serve given a limit on how many you can reach",
+      "Selecting which interventions to run when you can only run a fixed number",
+      "Facility location: where to open new offices, clinics, or distribution hubs",
+      "Binary or integer quantity decisions (can't send half a worker)"
+    ],
+    "contraindications": [
+      "All decisions are continuous proportions — use Linear Programming instead",
+      "The number of possible combinations is astronomically large without clear structure — consider heuristics or simulation"
+    ],
+    "social_examples": [
+      "A microfinance institution selecting which 20 of 80 loan applicants to fund, given a fixed capital pool",
+      "An NGO deciding which 5 of 12 districts to operate in, given staff capacity limits",
+      "A health ministry choosing which combination of interventions to fund within a fixed annual budget"
+    ],
+    "algorithm_examples": ["Branch-and-Bound", "Branch-and-Cut", "Cutting Plane Method"],
+    "data_requirements": [
+      "Value or impact of each option if selected",
+      "Cost or resource consumption of each option",
+      "Total budget or capacity constraint",
+      "Any logical constraints between options (e.g., if A is selected, B must also be)"
+    ],
+    "reference_paper": "Nemhauser, G.L. & Wolsey, L.A. (1988). Integer and Combinatorial Optimization. Wiley."
+  },
+  {
+    "id": "multiobjective_optimisation",
+    "name": "Multi-objective Optimisation",
+    "category": "Trade-off Analysis",
+    "plain_name": "Balancing Competing Goals",
+    "plain_description": "A method for finding the best solutions when you have two or more goals that pull in different directions — for example, maximising impact while minimising cost AND ensuring equity across communities. Rather than one 'best' answer, it produces a set of trade-off options (a Pareto frontier) so decision-makers can choose based on their values.",
+    "signals": [
+      "Two or more objectives that cannot all be maximised simultaneously",
+      "Need to explicitly explore the trade-off between cost and impact",
+      "Equity or fairness is a stated goal alongside efficiency",
+      "Stakeholders disagree on which objective matters most",
+      "Decision-makers want to see a range of options, not just one answer"
+    ],
+    "contraindications": [
+      "Only one objective matters — use LP or IP instead",
+      "Objectives can be combined into a single weighted score with agreed weights — use LP with a composite objective"
+    ],
+    "social_examples": [
+      "A city housing authority balancing cost-per-unit, geographic equity, and speed of delivery for a housing voucher programme",
+      "A global health funder exploring the trade-off between DALYs saved, cost-effectiveness, and coverage of marginalised groups",
+      "An education NGO balancing student outcomes, cost, and geographic reach when choosing which schools to support"
+    ],
+    "algorithm_examples": ["NSGA-II", "NSGA-III", "MOEA/D", "Weighted Sum Method", "ε-constraint Method"],
+    "data_requirements": [
+      "Quantified measure for each objective",
+      "Decision variables and constraints (same as LP/IP)",
+      "Stakeholder preferences or value weights (optional, for post-processing)"
+    ],
+    "reference_paper": "Deb, K. et al. (2002). A Fast and Elitist Multiobjective Genetic Algorithm: NSGA-II. IEEE Transactions on Evolutionary Computation."
+  },
+  {
+    "id": "network_routing",
+    "name": "Network / Routing Optimisation",
+    "category": "Logistics and Flow",
+    "plain_name": "Route and Flow Planning",
+    "plain_description": "A family of methods for problems involving movement through a network: routing vehicles or workers, designing supply chains, or distributing resources through connected nodes. Finds the fastest, cheapest, or most impactful paths and assignments across a geographic or organisational network.",
+    "signals": [
+      "Workers, vehicles, or supplies need to travel between multiple locations",
+      "Finding the shortest or cheapest route between points",
+      "Designing which locations should supply which other locations",
+      "Scheduling multiple vehicles or workers to cover a set of locations",
+      "Supply chain design: where to place warehouses or hubs"
+    ],
+    "contraindications": [
+      "No physical movement involved — use LP or matching instead",
+      "Network structure is unknown or must be inferred — use social network analysis first"
+    ],
+    "social_examples": [
+      "A health NGO routing community health workers across 30 villages to maximise patient visits per week",
+      "A food relief organisation designing supply routes from 3 warehouses to 50 distribution points",
+      "An ambulance service optimising vehicle placement to minimise average response time"
+    ],
+    "algorithm_examples": ["Dijkstra's Algorithm", "Vehicle Routing Problem (VRP) solvers", "Clarke-Wright Savings Algorithm", "Column Generation for large-scale VRP"],
+    "data_requirements": [
+      "Geographic locations (coordinates or distance matrix)",
+      "Travel times or costs between locations",
+      "Demand at each location (e.g., number of patients, kg of food needed)",
+      "Vehicle or worker capacity and availability"
+    ],
+    "reference_paper": "Toth, P. & Vigo, D. (2014). Vehicle Routing: Problems, Methods, and Applications. SIAM."
+  },
+  {
+    "id": "constraint_satisfaction",
+    "name": "Constraint Satisfaction / Scheduling",
+    "category": "Scheduling and Assignment",
+    "plain_name": "Scheduling and Timetabling",
+    "plain_description": "Methods for finding schedules or assignments that satisfy a complex set of rules simultaneously — who works when, which case goes to which worker, who attends which session. Unlike simple assignment, these problems have many hard rules that must all be respected at once.",
+    "signals": [
+      "Scheduling volunteers, staff, or clients across time slots",
+      "Assigning cases or tasks to workers with specific qualifications",
+      "Creating timetables where many constraints must hold simultaneously",
+      "Rostering with availability, skill, and workload constraints",
+      "Tournament or session scheduling"
+    ],
+    "contraindications": [
+      "No time dimension and assignments are one-to-one without complex rules — use Matching instead",
+      "Optimising a single objective without hard rule constraints — use LP or IP"
+    ],
+    "social_examples": [
+      "A domestic violence shelter scheduling counsellors across shifts, respecting availability, mandatory rest, and case-type qualifications",
+      "An employment programme scheduling job-seekers into training sessions, respecting language needs, childcare hours, and room capacities",
+      "A refugee resettlement organisation timetabling orientation sessions across 4 sites for families with different language groups"
+    ],
+    "algorithm_examples": ["CP-SAT (Constraint Programming + SAT)", "Backtracking with constraint propagation", "Local search / simulated annealing"],
+    "data_requirements": [
+      "Set of tasks or sessions to be assigned",
+      "Set of workers, rooms, or time slots available",
+      "Hard constraints (qualifications, availability, capacity)",
+      "Soft preferences (optional, for quality optimisation)"
+    ],
+    "reference_paper": "Rossi, F., van Beek, P. & Walsh, T. (2006). Handbook of Constraint Programming. Elsevier."
+  },
+  {
+    "id": "matching",
+    "name": "Matching / Assignment",
+    "category": "Pairing and Allocation",
+    "plain_name": "Optimal Pairing",
+    "plain_description": "Methods for pairing people or resources from two groups so that the overall match quality is as high as possible. Like a compatibility algorithm, but mathematically guaranteed to find the best overall pairing — not just good individual matches.",
+    "signals": [
+      "Pairing beneficiaries with services, workers, or resources",
+      "Assigning clients to case managers based on compatibility or need",
+      "Matching donors with recipients (organ donation, housing, scholarships)",
+      "Allocating students to schools or programmes",
+      "One-to-one or one-to-many pairing with preference or compatibility data"
+    ],
+    "contraindications": [
+      "Assignments involve complex scheduling rules — use Constraint Satisfaction instead",
+      "One side has no preferences and assignments are purely capacity-based — use LP"
+    ],
+    "social_examples": [
+      "A refugee resettlement organisation matching families to host communities based on language, cultural, medical, and geographic compatibility",
+      "A mentorship programme pairing at-risk youth with mentors based on shared interests and availability",
+      "A social housing agency matching applicants to available units based on need, family size, and accessibility requirements"
+    ],
+    "algorithm_examples": ["Hungarian Algorithm", "Gale-Shapley (Stable Matching)", "Min-cost Bipartite Matching"],
+    "data_requirements": [
+      "Compatibility or preference scores between each pair",
+      "Capacity constraints on each entity (e.g., one case manager can take max 20 clients)",
+      "Hard eligibility rules (e.g., must speak same language)"
+    ],
+    "reference_paper": "Gale, D. & Shapley, L.S. (1962). College Admissions and the Stability of Marriage. American Mathematical Monthly."
+  },
+  {
+    "id": "influence_maximisation",
+    "name": "Influence Maximisation (POMDP)",
+    "category": "Network Intervention Planning",
+    "plain_name": "Strategic Peer Influence Planning",
+    "plain_description": "A method for selecting the best people to involve in an intervention so that awareness, behaviour change, or information spreads as widely as possible through a social network. Particularly powerful when the social network is partially unknown. Formulated as a Partially Observable Markov Decision Process (POMDP), it plans across multiple rounds of interventions, learning as it goes.",
+    "signals": [
+      "Selecting participants for awareness or behaviour change interventions",
+      "Maximising spread of information through a peer community",
+      "Sequential interventions where you can observe and update after each round",
+      "Network structure is uncertain or only partially known",
+      "Goal is to influence as many people as possible indirectly through direct participants"
+    ],
+    "contraindications": [
+      "No social network structure — the population is disconnected individuals",
+      "Intervention is one-shot with no sequential rounds",
+      "Network is fully known with certainty — simpler greedy methods may suffice"
+    ],
+    "social_examples": [
+      "Homeless shelters selecting youth to participate in HIV prevention workshops, so they spread awareness to peers (cf. HEALER system, Yadav et al. 2016)",
+      "Community health programmes choosing which community members to train as peer health educators",
+      "An NGO selecting which farmers to train in climate-resilient practices to maximise adoption across a rural community"
+    ],
+    "algorithm_examples": ["HEAL (Hierarchical Ensembling Algorithm for pLanning)", "PSINET", "Greedy Influence Maximisation (Kempe et al.)", "POMDP with POMCP / DESPOT"],
+    "data_requirements": [
+      "Social network structure (friendship or trust edges between individuals)",
+      "Edge uncertainty probabilities (how confident you are each link exists)",
+      "Number of intervention rounds (T) and participants per round (K)",
+      "Propagation probability per edge",
+      "Observation model (what you learn after each intervention)"
+    ],
+    "reference_paper": "Yadav, A. et al. (2016). Using Social Networks to Aid Homeless Shelters: Dynamic Influence Maximization under Uncertainty. AAMAS 2016. arXiv:1602.00165"
+  },
+  {
+    "id": "simulation",
+    "name": "Simulation (Monte Carlo / Agent-Based)",
+    "category": "Scenario Analysis Under Uncertainty",
+    "plain_name": "What-If Scenario Testing",
+    "plain_description": "A method for testing how a policy, programme, or system behaves across thousands of simulated scenarios, capturing uncertainty and complexity that equations alone cannot represent. Monte Carlo simulation tests sensitivity to random variation; agent-based simulation models how individual actors (people, organisations) interact to produce system-level outcomes.",
+    "signals": [
+      "Uncertainty in key inputs (disease prevalence, uptake rates, demand) is high",
+      "System behaviour emerges from interactions between many individuals",
+      "Testing a policy before committing resources in the real world",
+      "Wanting to understand the range of possible outcomes (best/worst/likely case)",
+      "No closed-form analytical solution is tractable"
+    ],
+    "contraindications": [
+      "A single best decision needs to be computed — use LP/IP instead",
+      "Uncertainty is low and the system is well-understood — simulation adds cost without insight"
+    ],
+    "social_examples": [
+      "A government modelling how different cash transfer amounts affect food security across 10,000 simulated household trajectories",
+      "An NGO simulating how a disease spreads through a community under different vaccination coverage scenarios before committing to a strategy",
+      "A housing authority stress-testing its placement system against scenarios of sudden refugee influxes"
+    ],
+    "algorithm_examples": ["Monte Carlo Simulation", "Agent-Based Modelling (ABM)", "Discrete Event Simulation (DES)", "System Dynamics"],
+    "data_requirements": [
+      "Probability distributions for uncertain inputs (not just point estimates)",
+      "Behavioural rules for agents (if agent-based)",
+      "Validation data to calibrate the model against reality"
+    ],
+    "reference_paper": "Axelrod, R. (1997). The Complexity of Cooperation: Agent-Based Models of Competition and Collaboration. Princeton University Press."
+  }
+]

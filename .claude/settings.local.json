@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(py -c ' *)",
+      "Bash(py -m pip install pypdf --quiet)"
+    ]
+  }
+}
