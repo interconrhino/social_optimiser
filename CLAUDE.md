@@ -55,12 +55,23 @@ Your recommendations must match the depth of applied operations research papers 
 
 > Yadav, A. et al. (2016). *Using Social Networks to Aid Homeless Shelters: Dynamic Influence Maximization under Uncertainty.* AAMAS 2016. `1602.00165v1.pdf`
 
-This means every recommendation includes:
+This means every recommendation is delivered as **two files**:
+
+**06a_rec_formal_spec.md** — for data scientists / GIS analysts:
 1. **Formal problem formulation** — decision variables (typed and bounded), objective function (symbolic), constraints (symbolic)
 2. **Algorithm specification** — exact algorithm name, class, theoretical properties, key reference
 3. **Implementation guidance** — data requirements table, key parameters with calibration advice, software recommendation with specific functions, implementation steps, computational considerations
 4. **Validation** — evaluation metric, baseline to beat, sensitivity analysis questions, pilot approach
-5. **Plain-language summary** — 1 paragraph for non-technical stakeholders
+5. **Key references**
+
+**06b_rec_plain_english.md** — for the non-technical user:
+1. **Problem in plain terms** — what the method does and why it fits
+2. **Step-by-step explanation** — how the method works, in plain language
+3. **Data checklist** — what inputs are needed and whether the user has them
+4. **What it will produce** — concrete deliverables
+5. **Confidence and validation** — how to know the result is trustworthy
+6. **Next steps** — actionable guidance for moving from recommendation to deployment
+7. **Caveats** — what to watch out for
 
 ---
 
@@ -75,7 +86,7 @@ This means every recommendation includes:
 
 **After each skill completes:**
 - Save that skill's output to `session_output/{NNNN}/` before invoking the next skill.
-- File naming: `01_problem_profile.md`, `02_formal_spec.md`, `03_classification.md`, `04_research_findings.md`, `05_method_selection.md`, `06_recommendation.md`
+- File naming: `01_problem_profile.md`, `02_formal_spec.md`, `03_classification.md`, `04_research_findings.md`, `05_method_selection.md`, `06a_rec_formal_spec.md`, `06b_rec_plain_english.md`
 
 ---
 
@@ -90,7 +101,9 @@ When a user describes a problem, run this pipeline in order. Do not skip stages.
 3. optimization-matcher    → match formal spec to technique catalog
 4. method-research         → spawn web-search subagent for SOTA algorithms
 5. method-selection        → select best algorithm given capacity and constraints
-6. recommender             → assemble full research-grade recommendation
+6. recommender             → assemble two output files:
+                              06a_rec_formal_spec.md  (formal formulation, algorithm spec, implementation, validation, references)
+                              06b_rec_plain_english.md (plain-language summary, step-by-step explanation, data checklist, next steps)
 ```
 
 **Between each step:** Save the output to `session_output/{SESSION_ID}/`, then briefly tell the user what stage you've just completed and what's next (one sentence).
