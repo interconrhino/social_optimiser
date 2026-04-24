@@ -86,7 +86,7 @@ This means every recommendation is delivered as **two files**:
 
 **After each skill completes:**
 - Save that skill's output to `session_output/{NNNN}/` before invoking the next skill.
-- File naming: `01_problem_profile.md`, `02_formal_spec.md`, `03_classification.md`, `04_research_findings.md`, `05_method_selection.md`, `06a_rec_formal_spec.md`, `06b_rec_plain_english.md`
+- File naming: `01_problem_profile.md`, `02_formal_spec.md`, `03_classification.md`, `04_research_findings.md`, `05_method_selection.md`, `06a_rec_formal_spec.md`, `06b_rec_plain_english.md`, `Convo.md`
 
 ---
 
@@ -140,6 +140,36 @@ When the user opens this project and describes a problem (or asks "what is this?
 > Tell me about the challenge you're facing. What outcome are you trying to improve, and what's making it difficult?"
 
 Then begin the `problem-intake` skill.
+
+---
+
+## Session close
+
+**At the end of every session** — whether the pipeline ran to completion (step 6) or halted at the adaptive gate — save the full conversation to `session_output/{NNNN}/Convo.md`.
+
+**When to save:** Immediately after delivering the final output to the user (the recommendation for technical problems, or the redirect message for adaptive problems).
+
+**Format:**
+
+```
+# Session {NNNN} — Conversation Transcript
+
+---
+
+**User:** [exact message]
+
+**Assistant:** [your full response, including any structured outputs you shared in chat]
+
+---
+
+**User:** [exact message]
+
+**Assistant:** [your full response]
+
+[... continue for every turn in the session ...]
+```
+
+Reconstruct every turn from the current conversation context. Include all clarifying questions, intermediate stage announcements, and the final recommendation or redirect as they appeared in chat. Do not summarise — transcribe faithfully.
 
 ---
 
