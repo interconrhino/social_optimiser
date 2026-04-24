@@ -1,0 +1,19 @@
+{
+  "paper_id": "paper_05",
+  "run_id": 1,
+  "session_id": "0007",
+  "judged_at": "2026-04-24T18:07:41Z",
+  "scores": {
+    "method_family": 4,
+    "formulation": 4,
+    "depth": 4,
+    "implementation": 4,
+    "clarity": 4
+  },
+  "total": 20,
+  "method_named": "Whittle Index Policy for a Partially Observable Restless Multi-Armed Bandit, fit using Decision-Focused Learning (DFL) for transition-model estimation, and modified with a ProbFair-style per-subgroup minimum-pull-probability constraint for equity",
+  "method_gold": "Real-world RMAB deployment with field validation; significantly outperforms rule-based baselines",
+  "gold_family": "Sequential resource scheduling under capacity constraints using RMAB / Whittle index",
+  "match_rationale": "The recommendation names the exact gold family (RMAB with Whittle-index policy) and captures the deployment-pattern that is the essence of the gold key method: a field-validated Whittle policy that beats a rule-based rotation baseline, with a pre-committed side-by-side pilot design as the validation vehicle. The recommendation additionally layers DFL (to address the confounded historical data the innovator flagged) and ProbFair (to address the stated equity requirement) on top of the vanilla RMAB core; these are principled extensions of, not deviations from, the gold method. The formal spec correctly specifies binary per-arm-per-period decisions, a cumulative-engagement objective, a hard per-period budget K=400, and equity floor constraints, matching the structural_core of the gold label exactly. Match is full on every dimension.",
+  "failure_modes": ["catalog_gap", "web_leakage_suspected"]
+}

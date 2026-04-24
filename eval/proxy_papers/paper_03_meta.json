@@ -1,0 +1,39 @@
+{
+  "original_paper_id": "paper_03",
+  "original_title": "Navigating the Social Welfare Frontier — Portfolios for Multi-objective Reinforcement Learning",
+  "original_authors": "Cheol Woo Kim, Jai Moondra, Shresth Verma, Madeleine Pollack, Lingkai Kong, Milind Tambe, Swati Gupta",
+  "original_venue": "ICML 2025",
+  "original_local_file": "2502.09724v2.pdf",
+  "proxy_domain": "regional_workforce_apprenticeship_placement_strategy",
+  "structural_core": {
+    "decision_variables": "A policy pi mapping observed state (per-group backlogs, pipeline, employer-relationship state) to a per-quarter allocation of slots across N heterogeneous beneficiary groups and sub-programmes. The ultimate deliverable is a small portfolio Pi' of such policies, each one optimised for a different welfare-aggregation preference over the N groups.",
+    "objective": "For each stakeholder group i in 1..N, a scalar cumulative outcome G_i over the 20-quarter horizon (sustained placements in that group, net of weighted costs). The decision-maker wants to aggregate (G_1, ..., G_N) via a generalised p-mean: p = -infinity (maximise worst-off group), p = 0 (geometric/balanced), p = 1 (sum of placements), and intermediate p values. Because the board's preferred p is not fixed in advance, the goal is to produce a small portfolio of policies that is simultaneously approximately optimal across all p <= 1.",
+    "constraints": "Per-quarter slot capacity (400-600 slots) and per-quarter caseworker staff-hour budget. Sequential constraints: backlog carries forward; long apprenticeships occupy slots for multiple quarters; employer-relationship state evolves based on past placement success. Portfolio-size constraint: the set of candidate policies delivered to the board must be small (3-10) so that a non-technical board can meaningfully compare them.",
+    "dynamics": "Sequential decision problem over T = 20 quarters. Stochastic, Markovian: next-quarter state (backlogs, pipelines, employer willingness by group) depends on current state and the current quarter's allocation decision, plus randomness in who applies and who completes. Multi-objective: N group-specific reward streams rather than a single scalar reward.",
+    "information_structure": "Current state is observable each quarter (how many candidates in each group's pipeline, which employers are engaged, placement outcomes so far). Transition model is not analytically known but can be queried via a commissioned simulator that takes a policy and returns group-by-group trajectories. The 'right' social welfare aggregation (which p to use) is explicitly unknown to the analyst and will be chosen by the board after seeing the portfolio.",
+    "data": "9 years of quarterly operational records; participant-level intake records for ~14,000 past participants across 4 groups; employer-side retention/satisfaction history; a trusted simulator that evaluates any proposed policy over a 20-quarter horizon and returns per-group cumulative outcomes.",
+    "scale": "N = 4 stakeholder groups (school-leavers, mid-career displaced, returners, justice-affected); T = 20 quarters (5 years); ~400-600 slots per quarter; target portfolio size 3-10 policies; finite but large state space driven by per-group backlog and employer-relationship state."
+  },
+  "candidate_domains_considered": [
+    "Regional workforce & apprenticeship placement strategy across four heterogeneous beneficiary groups (selected)",
+    "Multi-year municipal park maintenance investment across neighbourhood districts with different demographic priority groups (children / elderly / ecological stewards) — rejected: weaker narrative pull for the egalitarian-vs-utilitarian tension; 'parks maintenance' risks search overlap with asset-maintenance MDP literature",
+    "Adaptive tutoring slot allocation across learner subgroups (language learners / disability-profile learners / returning adults) — rejected: tutoring/engagement framing is close in vibe to the adherence-intervention literature that is adjacent to one of the original paper's own experimental environments (ARMMAN-style mobile health), creating unnecessary leakage risk"
+  ],
+  "domain_selection_rationale": "Regional vocational / apprenticeship placement policy cleanly preserves every structural element of the original paper: (a) a genuinely sequential decision problem over a multi-year horizon, not a one-shot allocation; (b) N distinct stakeholder groups whose cumulative outcomes are the objectives to aggregate; (c) a real, lived political tension between prioritising the worst-off group (justice-affected adults), balancing across groups, and maximising total placements — i.e. an honest egalitarian / Nash / utilitarian disagreement that a non-technical board actually has; and (d) an explicit request for a *small menu of candidate strategies*, each tied to a different welfare stance, rather than a single recommended policy. The domain avoids all of the forbidden adjacent areas (public health allocation, vaccine distribution, disaster relief, refugee resettlement), and workforce/apprenticeship policy is not a canonical MORL testbed in the AI4SI literature, so pattern-matching on domain keywords should not short-circuit method reasoning.",
+  "leakage_queries": [
+    {
+      "query": "regional workforce agency multi-year apprenticeship placement strategy across beneficiary groups",
+      "assessment": "Low leakage risk. First-page results are dominated by labour-market policy papers, OECD / ILO reports, and workforce-development operational literature. The ICML 2025 portfolio-MORL paper is extremely unlikely to appear."
+    },
+    {
+      "query": "how to present a small menu of five-year training strategies to a board with conflicting priorities",
+      "assessment": "Low leakage risk. Structural phrasing that would surface strategy / scenario-planning literature in public management, not MORL portfolio papers. 'Small menu' is deliberately non-technical vocabulary."
+    },
+    {
+      "query": "comparing policies that help worst-off group versus maximising total placements workforce programme",
+      "assessment": "Low-to-moderate leakage risk. Touches fairness-in-ML and social-choice literature, which could in principle surface generalised-p-mean papers. However, the workforce-domain anchor makes labour-economics and equity-in-training papers far more likely first-page results than a specific ICML RL portfolio paper."
+    }
+  ],
+  "gold_method_family": "Multi-objective Reinforcement Learning (MORL) over generalised p-mean social welfare functions (Egalitarian p=-inf, Nash p=0, Utilitarian p=1)",
+  "gold_key_method": "alpha-approximate portfolio of policies — a small finite set of policies provably alpha-close to optimal simultaneously across all p-mean welfare functions for all p <= 1, constructed via a line-search over p values (p-MEANPORTFOLIO algorithm) with an oracle-budget-constrained heuristic variant"
+}

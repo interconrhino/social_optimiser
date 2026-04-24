@@ -1,0 +1,19 @@
+{
+  "paper_id": "paper_01",
+  "run_id": 1,
+  "session_id": "0004",
+  "judged_at": "2026-04-24T18:08:59Z",
+  "scores": {
+    "method_family": 2,
+    "formulation": 2,
+    "depth": 3,
+    "implementation": 4,
+    "clarity": 4
+  },
+  "total": 15,
+  "method_named": "AUGMECON2 (Augmented ε-Constraint Method for Multi-Objective Integer Programming) with Weighted Goal Programming and Chebyshev (min-max) scalarisations as configurable modes on top of a shared binary-knapsack MIP backbone",
+  "method_gold": "Social Choice Language Model (SCLM) — an LLM generates candidate reward functions (as code) via evolutionary search; an external adjudicator scores each candidate against each prioritization clause and aggregates the per-clause scores using a user-selected social welfare function (Utilitarian / Nash / Egalitarian p-mean) to pick the winning reward function.",
+  "gold_family": "Multi-objective reward function optimization for Restless Multi-Armed Bandits (RMAB) with social-choice aggregation",
+  "match_rationale": "The recommendation captures only half of the gold structure. It correctly identifies the multi-objective / social-choice-aggregation axis (weighted-sum, Chebyshev max-min, and ε-constraint modes are structurally analogous to the Utilitarian / Egalitarian / constrained social-welfare functions the gold method uses to aggregate per-clause scores) and picks a technique that would produce working weekly call lists. However, it entirely misses the two defining features of the gold family: (a) the restless-bandit / weakly-coupled-MDP dynamic structure with per-student Markovian engagement states and budget-coupled sequential decisions, which the pipeline explicitly downgrades to a myopic weekly re-optimisation loop with pre-computed retention-gain coefficients; and (b) the LLM-generated-reward-function / evolutionary-search mechanism that is the specific contribution of the Balancing Act paper. The 03_classification.md and 05_method_selection.md files openly acknowledge the catalog does not contain RMAB / weakly-coupled-MDP methods and explicitly list this as a limitation, so the pipeline is honest about the gap but still routes to a structurally-different (static, exact-Pareto MOIP) family that would produce an inferior solution for this hidden-state sequential-allocation problem.",
+  "failure_modes": ["catalog_gap", "wrong_family", "missing_llm_reward_generation", "no_social_welfare_function_terminology"]
+}

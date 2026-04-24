@@ -1,0 +1,39 @@
+{
+  "original_paper_id": "paper_04",
+  "original_title": "Decision-Focused Learning in Restless Multi-Armed Bandits with Application to Maternal and Child Health",
+  "original_authors": "Kai Wang, Shresth Verma, Aditya Mate, Sanket Shah, Aparna Taneja, Neha Madhiwalla, Aparna Hegde, Milind Tambe",
+  "original_venue": "AAAI 2023",
+  "original_local_file": "2202.00916v1.pdf",
+  "proxy_domain": "refugee_resettlement_casework",
+  "structural_core": {
+    "decision_variables": "Binary per-entity per-period action — visit family i in week t (a_i,t ∈ {0,1}). N ≈ 800 entities, T = 52 periods.",
+    "objective": "Maximise expected discounted cumulative reward over T periods, where per-family per-week reward is a welfare score on the hidden state (weeks stable − weighted weeks in crisis), summed across all families.",
+    "constraints": "Per-period budget K = 40 (caseworker visit capacity): Σ_i a_i,t ≤ K for each week t. Binary action. No cross-family coupling beyond the shared budget.",
+    "dynamics": "Each family is an independent Markov decision process on a 3-state space {stable, at-risk, crisis}. Transition probabilities depend on whether the family was visited this week (a = 0 or 1) and on per-family features. Transitions are stochastic and a priori unknown.",
+    "information_structure": "Observable: per-family features at intake + current observed state. Hidden: exact transition probabilities per family. Learned over time from historical trajectories of prior cohorts under a past (suboptimal, non-random) behavioural policy.",
+    "data": "~2,400 historical families with full weekly state trajectories and per-visit logs. Rich intake-time features (origin, family composition, language, trauma score, etc.). No randomised control data — historical visits reflect caseworker judgement, creating selection bias in the trajectory data. Ongoing weekly observations on active cohort.",
+    "scale": "N ≈ 800 active families; K = 40 visits/week; T = 52 weeks; ~3-state space per family; 10–20 intake features per family."
+  },
+  "candidate_domains_considered": [
+    "Refugee resettlement caseworker follow-up scheduling (selected)",
+    "Municipal housing-authority home inspection scheduling for deteriorating properties — rejected: property-inspection + Markov deterioration is close to known asset-maintenance RMAB literature and at risk of overlapping with Glazebrook/Kirkbride machine-maintenance references cited in the original paper",
+    "Adult-literacy programme tutoring-session scheduling across enrolled learners — rejected: learner-dropout and adherence framing is close in vibe to the maternal-health ARMMAN programme and could surface the original paper via adjacent terms like 'adherence' or 'engagement'"
+  ],
+  "domain_selection_rationale": "Refugee resettlement casework preserves every structural element of the original: a population of heterogeneous beneficiaries each with a hidden dynamic state, a small per-period capacity budget for interventions, rich pre-intervention feature data, a long sequential horizon, historical trajectory data from a non-random past policy, and a welfare-style cumulative objective. Crucially, refugee resettlement is *not* a previously-studied RMAB application domain in the AI4SI literature (unlike maternal health, TB, poaching, homelessness, or lead testing), so the optimiser cannot shortcut the reasoning by pattern-matching the domain to a known technique.",
+  "leakage_queries": [
+    {
+      "query": "refugee resettlement caseworker weekly home visit scheduling",
+      "assessment": "Low leakage risk. Refugee resettlement casework has operational literature in social-work journals but no prominent RMAB or decision-focused-learning paper. First-page results would likely be NGO operational guides, not the Wang et al. 2022 paper."
+    },
+    {
+      "query": "how to prioritise limited caseworker visits across hundreds of families with hidden status",
+      "assessment": "Low-to-moderate leakage risk. Structural phrasing ('prioritise', 'limited', 'hidden status') might surface papers on case-management prioritisation or scheduled intervention, but the maternal-health RMAB paper would require a domain-match that is absent here."
+    },
+    {
+      "query": "predicting which refugee families need intervention from intake data",
+      "assessment": "Low leakage risk. This would surface predictive-risk-modelling literature in social work and public health, not the target paper. The decision-focused-learning framing is specific enough that a generic predictive-modelling query does not retrieve it."
+    }
+  ],
+  "gold_method_family": "Restless Multi-Armed Bandit (RMAB) with Whittle index policy",
+  "gold_key_method": "Decision-Focused Learning (DFL) — trains the predictive model directly to maximise downstream Whittle index solution quality, rather than minimising predictive loss"
+}
