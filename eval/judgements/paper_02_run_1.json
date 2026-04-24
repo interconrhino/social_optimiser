@@ -1,0 +1,19 @@
+{
+  "paper_id": "paper_02",
+  "run_id": 1,
+  "session_id": "0005",
+  "judged_at": "2026-04-24T18:07:21Z",
+  "scores": {
+    "method_family": 4,
+    "formulation": 4,
+    "depth": 4,
+    "implementation": 4,
+    "clarity": 4
+  },
+  "total": 20,
+  "method_named": "DPO-PRO (Direct Preference Optimization with Preference Robustness)",
+  "method_gold": "Lightweight DRO formulation that accounts for uncertainty in preference distributions without excessive conservatism — chi-squared ambiguity set placed only on the per-pair preference probability q(y1 > y2 | x) (not on the joint data distribution), yielding a closed-form worst-case preference that is substituted into the standard DPO gradient; equivalent to a regularised DPO loss that penalises model overconfidence on uncertain preference signals.",
+  "gold_family": "Distributionally Robust Optimization (DRO) applied to LLM fine-tuning via Direct Preference Optimization (DPO-PRO)",
+  "match_rationale": "The recommendation names the exact gold family (DRO applied to DPO fine-tuning) and the exact gold key method (DPO-PRO with a chi-squared ambiguity set localised to the per-pair preference conditional, yielding a closed-form regularised DPO loss). The formal specification reproduces the paper's closed-form loss min{1-q, sqrt(rho*q*(1-q))}*(l1 - l-1), correctly identifies the surgical-vs-joint DRO distinction, and cites Proposition 4.1 (unbiased gradient via Danskin) with the right authors, venue, and arXiv ID. Implementation guidance is concrete (HuggingFace TRL DPOTrainer, LoRA rank, rho sweep grid, district-level split, SFT+DPO-PRO epoch recipe, quantisation, pilot metrics). The plain-English summary is genuinely non-technical, uses the 'uncertainty bubble' metaphor consistently, and frames the trust story for a city council. Match is full on all five dimensions. However, the recommendation cites the exact original paper (arXiv:2509.02709, Kim/Verma/Tec/Tambe 2025) verbatim — including its twin arXiv:2510.23590 — and mirrors the ARMMAN validation narrative, which strongly suggests web research retrieved the source paper; flagging for human review.",
+  "failure_modes": ["web_leakage_suspected", "catalog_gap"]
+}

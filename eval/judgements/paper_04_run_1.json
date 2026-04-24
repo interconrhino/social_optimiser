@@ -1,0 +1,19 @@
+{
+  "paper_id": "paper_04",
+  "run_id": 1,
+  "session_id": "0003",
+  "judged_at": "2026-04-22T00:00:00Z",
+  "scores": {
+    "method_family": 4,
+    "formulation": 4,
+    "depth": 4,
+    "implementation": 4,
+    "clarity": 4
+  },
+  "total": 20,
+  "method_named": "Whittle Index Policy for Restless Multi-Armed Bandits (RMAB), with a learned per-family transition model — and, if in-house ML capacity allows in a second phase, Decision-Focused Learning (DFL) to train that transition model end-to-end for Whittle-index decision quality.",
+  "method_gold": "Decision-Focused Learning (DFL) — trains the predictive model directly to maximise downstream Whittle index solution quality, rather than minimising predictive loss",
+  "gold_family": "Restless Multi-Armed Bandit (RMAB) with Whittle index policy",
+  "match_rationale": "The recommendation names the exact gold method family (RMAB with Whittle-index policy) as its primary algorithm and explicitly identifies Decision-Focused Learning (Wang et al. AAAI 2023, arXiv:2202.00916) as the recommended phase-2 upgrade with the correct framing that DFL trains the transition model for downstream Whittle-index decision quality rather than predictive accuracy. The formulation faithfully reproduces the structural core (binary per-family per-week actions, weekly budget K=40, 52-week horizon, 3-state per-family Markov dynamics with 2 actions, welfare-style cumulative reward with crisis weight), and the historical-confounding / selection-bias issue is directly treated via IPW and doubly-robust estimation with an explicit past-policy propensity model. The only mild gap from a perfect match is that DFL is staged as optional phase-2 rather than being the headline method — but the primary Whittle-index-with-learned-kernel recommendation is the direct precursor to DFL in the original paper's own narrative, so the structural alignment is essentially full.",
+  "failure_modes": ["web_leakage_suspected", "catalog_gap"]
+}

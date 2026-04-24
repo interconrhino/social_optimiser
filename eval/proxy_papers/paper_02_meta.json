@@ -1,0 +1,39 @@
+{
+  "original_paper_id": "paper_02",
+  "original_title": "Preference Robustness for DPO with Applications to Public Health",
+  "original_authors": "Cheol Woo Kim, Shresth Verma, Mauricio Tec, Milind Tambe",
+  "original_venue": "AAAI 2025",
+  "original_local_file": "2509.02709v2.pdf",
+  "proxy_domain": "participatory_budgeting_bundle_ranking_assistant",
+  "structural_core": {
+    "decision_variables": "Parameters theta of a medium-sized open-weights language model that, given a context x (district + prompt) and two candidate outputs y1, y2 (project bundles), assigns a score / log-probability used to induce a preference between them. Training objective is over these parameters; deployment uses them to rank new candidates.",
+    "objective": "Minimise a distributionally robust preference-learning loss — i.e., the expected pairwise preference loss under a worst-case perturbation of the per-pair preference probability within a tight ambiguity set — so that the learned model ranks candidate bundles in line with ground-truth resident preferences at deployment, not merely the noisy observed annotations.",
+    "constraints": "Pairwise-preference data access only (no absolute scores); robustness budget (chi-squared ball of radius rho) applied only to the preference distribution q(y1 > y2 | x), NOT to the distribution over (x, y1, y2); compute constraint — fine-tuning must fit on a single GPU (3–8B parameter model), inference must run on-premises (no external API at deployment); training data volume is bounded (~9,000 pairs over ~180 prompts).",
+    "dynamics": "One-shot fine-tuning problem (not sequential decision-making): collect noisy pairwise annotations, run DPO-style fine-tuning under DRO adjustment on preference probabilities, deploy the fine-tuned ranker. At deployment time the scoring model is used as-is; feedback is not immediately re-incorporated.",
+    "information_structure": "Observable at training time: noisy soft preference q(y1 > y2 | x) per pair (derived from a panel of ~60–90 residents per district and/or trained reviewer judges). Hidden: the true neighbourhood-level preference distribution p*; the deployment-time distribution which will differ because new districts / shifted priorities come online. More annotation collection cannot fully resolve this — individual raters are themselves temporally inconsistent, and the deployment population is not the training population.",
+    "data": "~9,000 pairwise judgements over ~180 district-prompts; mix of resident panellists and a smaller pool of trained civic-design reviewers; district-level context features (demographics, existing infrastructure, recent service-request patterns); soft preference scores derivable either from multi-rater aggregation or from token-level log-probabilities of an off-the-shelf judge model.",
+    "scale": "Fine-tune a 3–8B parameter open-weights LM; ~9k pairwise records; ~180 unique prompts; 3–15 candidate bundles per district; compute fits on a handful of A100-class GPUs; six-month project runway."
+  },
+  "candidate_domains_considered": [
+    "Participatory-budgeting bundle-ranking assistant (selected) — city residents pairwise-compare candidate neighbourhood project bundles; train a small open-weights ranker under noisy/shifting resident preferences.",
+    "Community-arts grant-panel pre-screening assistant — rejected because 'grant review preference elicitation' is close in framing to RLHF-for-content-moderation literature and to medical-ethics preference-elicitation work that the constraints explicitly flag as a leakage axis.",
+    "Conservation-NGO ranger patrol-plan preference model — rejected because conservation patrolling has a heavy AI4SI footprint (PAWS, poaching, RMAB variants) and a reader familiar with that literature would shortcut past the preference-learning core into that method family."
+  ],
+  "domain_selection_rationale": "Participatory budgeting preserves all four structural requirements of the original. (a) Preferences are elicited pairwise from many noisy human raters (resident panellists) with known-unreliable and inconsistent judgement — matching the DPO data-collection setup. (b) The learned model is used downstream to make real decisions (it ranks candidate project bundles for a volunteer panel), so the classic 'good prediction does not imply good downstream decisions' gap applies, matching the paper's motivation. (c) There is a genuine and self-evident distribution shift from training to deployment (new cities sign on, priorities shift across years, new panels are not the training panels), matching exactly the paper's concern about p* drift. (d) Scale is realistic for a full fine-tuning run of a mid-size open-weights model on a single GPU, matching the paper's Phi-3-mini 3B setup. The domain has no prior DPO/DRO literature footprint in civic-tech, is not in the AI4SI canon for any other method family, and the framing (volunteer burnout, civic deliberation, on-premises deployment) is the kind of plain-language pitch an NGO programmes director would actually write.",
+  "leakage_queries": [
+    {
+      "query": "participatory budgeting volunteer panel bundle ranking assistant",
+      "assessment": "Low leakage risk. Participatory-budgeting research is dominated by political-science and civic-tech literature (Fung, Ganuza, Decide Madrid, Stanford PB group); a web search returns operational guides and social-science papers, none of which is the Kim et al. DPO-PRO paper or its ARMMAN/maternal-health context."
+    },
+    {
+      "query": "training a language model from noisy human pairwise preferences with distribution shift between training and deployment",
+      "assessment": "Moderate leakage risk on the method side (this is literally the DPO-DRO problem statement), but the domain words 'participatory budgeting' and 'neighbourhood project bundles' keep the paper itself buried. Results would surface generic RLHF/DPO robustness literature; the maternal-health public-health angle of the original is absent from this query, so the specific Kim et al. 2025 paper would not rank above general DPO-robustness surveys."
+    },
+    {
+      "query": "how to fine-tune an open source LLM from resident pairwise judgements when the panel disagrees",
+      "assessment": "Low leakage risk. 'Resident pairwise judgements' is a civic-tech phrasing not used in the target paper, and the target paper's discoverability is tightly tied to 'maternal health', 'RMAB', or 'ARMMAN' — none of which appear in this query or in plausible follow-ups."
+    }
+  ],
+  "gold_method_family": "Distributionally Robust Optimization (DRO) applied to LLM fine-tuning via Direct Preference Optimization (DPO-PRO)",
+  "gold_key_method": "Lightweight DRO formulation that accounts for uncertainty in preference distributions without excessive conservatism — chi-squared ambiguity set placed only on the per-pair preference probability q(y1 > y2 | x) (not on the joint data distribution), yielding a closed-form worst-case preference that is substituted into the standard DPO gradient; equivalent to a regularised DPO loss that penalises model overconfidence on uncertain preference signals."
+}

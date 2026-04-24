@@ -1,0 +1,39 @@
+{
+  "original_paper_id": "paper_01",
+  "original_title": "Balancing Act: Prioritization Strategies for LLM-Designed Restless Bandit Rewards",
+  "original_authors": "Shresth Verma, Niclas Boehmer, Lingkai Kong, Milind Tambe",
+  "original_venue": "NeurIPS 2024",
+  "original_local_file": "2408.12112v6.pdf",
+  "proxy_domain": "community_college_student_success_outreach",
+  "structural_core": {
+    "decision_variables": "Binary per-entity per-period action — place a coaching call to student i in week t (a_i,t in {0,1}). N ~ 2,100 flagged students across network, T = 12 weeks/semester.",
+    "objective": "A composite, multi-objective welfare target specified by a natural-language preference paragraph containing multiple prioritization clauses (e.g. prioritise first-gen AND prioritise low-income AND do not shift the utility distribution for adult learners). Per-beneficiary per-period utility is a welfare score on hidden engagement state, summed across students. The system must balance alignment with every clause rather than optimise a single scalar.",
+    "constraints": "Per-period capacity K = 210 outreach calls/week across the network: sum_i a_i,t <= K for each week t. Binary action. No cross-student coupling beyond the shared weekly capacity.",
+    "dynamics": "Each student is an independently-evolving Markov process on an engagement state space (simplest case: 2-state {disengaged, engaged}; extensible to 3-state {engaged, at-risk, disengaged}). Transition probabilities depend on whether the student was called this week (a = 0 or 1) and on per-student features. Transitions are stochastic and unknown a priori.",
+    "information_structure": "Observable: per-student intake + demographic features, current observed engagement proxy. Hidden: true engagement state and exact per-student transition probabilities. Learned from historical trajectories of past cohorts under a non-random coach-judgement policy. In addition, the prioritisation paragraph itself is natural-language input that must be interpreted into a quantifiable ranking over candidate allocation rules.",
+    "data": "~12,000 historical students with 3 years of weekly engagement records and per-call logs. 8-12 categorical features per student (age band, income band, first-gen, campus, programme, dependants, prior-GPA band, distance band). Historical calls reflect past coach judgement -> selection bias. Current-semester weekly observations on ~18,000 active students.",
+    "scale": "N ~ 2,100 flagged at any week; K = 210 calls/week; T = 12 weeks; 2-3 engagement states per student; 8-12 features per student; 3 to a few dozen stakeholder prioritisation clauses per semester."
+  },
+  "candidate_domains_considered": [
+    "Community college student success outreach (selected) — natural multi-stakeholder disagreement (equity office vs. STEM funders vs. adult-learner advocates) makes the multi-objective structure authentic without forcing it.",
+    "Smallholder-farmer agricultural extension visit scheduling — rejected: close in vibe to adherence / engagement RMAB work, and 'extension visit scheduling' has adjacent RMAB literature on agricultural advisory services that could leak the method family.",
+    "Reentry / parole navigator weekly check-in scheduling — rejected: recidivism-risk prediction is politically fraught, and several AI-for-justice RMAB-adjacent papers exist; also risks moral hazard in a proxy designed only to probe method selection."
+  ],
+  "domain_selection_rationale": "Community college student-success outreach preserves every structural element of the source paper: N heterogeneous beneficiaries with hidden Markovian engagement state, small per-week capacity budget, per-student categorical features, a 12-week horizon, historical trajectory data from a non-random past policy, AND — critically — a genuine multi-stakeholder disagreement that naturally produces composite natural-language prioritisation prompts with multiple clauses. This last feature is what distinguishes the Balancing Act paper from the earlier Decision-Focused-Learning RMAB paper (paper_04, whose proxy is refugee resettlement): paper_01's structural signature is the *composite, conflicting, natural-language preference prompt* and the need for a principled aggregation of per-clause scores. Student retention outreach is not a previously-studied RMAB application domain in the AI4SI literature (unlike ARMMAN, TB adherence, poaching, homelessness, lead testing), so the social_optimiser cannot shortcut method selection by domain-pattern-matching. The domain also makes 'prioritisation clauses' (first-gen, low-income, adult-learner, commuter, STEM) feel completely natural rather than contrived.",
+  "leakage_queries": [
+    {
+      "query": "community college student success weekly coaching call prioritization",
+      "assessment": "Low leakage risk. Returns student-success / retention operational literature (CCRC, Jobs for the Future, Aspen Institute) and vendor marketing (EAB, Civitas). The ARMMAN / Balancing Act papers would not surface — domain vocabulary is orthogonal."
+    },
+    {
+      "query": "how to balance multiple equity priorities when assigning limited outreach staff across thousands of students",
+      "assessment": "Low-to-moderate leakage risk. Structural phrasing ('balance multiple priorities', 'limited staff') might pull in some fairness-in-ML or multi-objective optimisation surveys, but would not retrieve a maternal-health RMAB paper without a domain match. The multi-objective-welfare framing is generic enough to be safe."
+    },
+    {
+      "query": "translate a natural language priority statement from stakeholders into a weekly outreach schedule",
+      "assessment": "Low leakage risk at the time of writing. LLM-for-scheduling queries would surface generic LLM-agent / LLM-planning work, but the specific combination of (LLM reward generation + social choice adjudicator + RMAB) is narrow enough that a domain-free query would not retrieve the Verma et al. paper on the first page unless the searcher already knew to add 'bandit' or 'reward function' to the query."
+    }
+  ],
+  "gold_method_family": "Multi-objective reward function optimization for Restless Multi-Armed Bandits (RMAB) with social-choice aggregation",
+  "gold_key_method": "Social Choice Language Model (SCLM) — an LLM generates candidate reward functions (as code) via evolutionary search; an external adjudicator scores each candidate against each prioritization clause and aggregates the per-clause scores using a user-selected social welfare function (Utilitarian / Nash / Egalitarian p-mean) to pick the winning reward function."
+}

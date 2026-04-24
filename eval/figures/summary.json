@@ -1,0 +1,103 @@
+{
+  "per_paper_totals": {
+    "paper_01": {
+      "mean_total": 15.0,
+      "min_total": 15,
+      "max_total": 15,
+      "n_runs": 1,
+      "method_named_first_run": "AUGMECON2 (Augmented \u03b5-Constraint Method for Multi-Objective Integer Programming) with Weighted Goal Programming and Chebyshev (min-max) scalarisations as configurable modes on top of a shared binary-knapsack MIP backbone",
+      "gold_family": "Multi-objective reward function optimization for Restless Multi-Armed Bandits (RMAB) with social-choice aggregation",
+      "flags_union": [
+        "catalog_gap",
+        "missing_llm_reward_generation",
+        "no_social_welfare_function_terminology",
+        "wrong_family"
+      ]
+    },
+    "paper_02": {
+      "mean_total": 20.0,
+      "min_total": 20,
+      "max_total": 20,
+      "n_runs": 1,
+      "method_named_first_run": "DPO-PRO (Direct Preference Optimization with Preference Robustness)",
+      "gold_family": "Distributionally Robust Optimization (DRO) applied to LLM fine-tuning via Direct Preference Optimization (DPO-PRO)",
+      "flags_union": [
+        "catalog_gap",
+        "web_leakage_suspected"
+      ]
+    },
+    "paper_03": {
+      "mean_total": 18.0,
+      "min_total": 18,
+      "max_total": 18,
+      "n_runs": 1,
+      "method_named_first_run": "\u03b1-fair (p-mean) scalarisation sweep over a curated ladder of stance points, with CMA-ES as the inner simulation-based policy-search solver against the commissioned simulator. AUGMECON2-style \u03b5-constraint framing is kept as a drop-in equivalent inner formulation for stances that the board prefers to express as floors.",
+      "gold_family": "Multi-objective Reinforcement Learning (MORL) over generalised p-mean social welfare functions (Egalitarian p=-inf, Nash p=0, Utilitarian p=1)",
+      "flags_union": [
+        "missing_selection_bias_treatment"
+      ]
+    },
+    "paper_04": {
+      "mean_total": 20.0,
+      "min_total": 20,
+      "max_total": 20,
+      "n_runs": 1,
+      "method_named_first_run": "Whittle Index Policy for Restless Multi-Armed Bandits (RMAB), with a learned per-family transition model \u2014 and, if in-house ML capacity allows in a second phase, Decision-Focused Learning (DFL) to train that transition model end-to-end for Whittle-index decision quality.",
+      "gold_family": "Restless Multi-Armed Bandit (RMAB) with Whittle index policy",
+      "flags_union": [
+        "catalog_gap",
+        "web_leakage_suspected"
+      ]
+    },
+    "paper_05": {
+      "mean_total": 20.0,
+      "min_total": 20,
+      "max_total": 20,
+      "n_runs": 1,
+      "method_named_first_run": "Whittle Index Policy for a Partially Observable Restless Multi-Armed Bandit, fit using Decision-Focused Learning (DFL) for transition-model estimation, and modified with a ProbFair-style per-subgroup minimum-pull-probability constraint for equity",
+      "gold_family": "Sequential resource scheduling under capacity constraints using RMAB / Whittle index",
+      "flags_union": [
+        "catalog_gap",
+        "web_leakage_suspected"
+      ]
+    }
+  },
+  "per_dimension_means": {
+    "paper_01": {
+      "method_family": 2.0,
+      "formulation": 2.0,
+      "depth": 3.0,
+      "implementation": 4.0,
+      "clarity": 4.0
+    },
+    "paper_02": {
+      "method_family": 4.0,
+      "formulation": 4.0,
+      "depth": 4.0,
+      "implementation": 4.0,
+      "clarity": 4.0
+    },
+    "paper_03": {
+      "method_family": 3.0,
+      "formulation": 4.0,
+      "depth": 3.0,
+      "implementation": 4.0,
+      "clarity": 4.0
+    },
+    "paper_04": {
+      "method_family": 4.0,
+      "formulation": 4.0,
+      "depth": 4.0,
+      "implementation": 4.0,
+      "clarity": 4.0
+    },
+    "paper_05": {
+      "method_family": 4.0,
+      "formulation": 4.0,
+      "depth": 4.0,
+      "implementation": 4.0,
+      "clarity": 4.0
+    }
+  },
+  "algorithm_selector_baseline_note": "All 5 papers scored 0 on exact-match in EVAL_TEST_5PAPERS.md"
+}
